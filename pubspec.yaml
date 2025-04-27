@@ -1,0 +1,56 @@
+name: nt_unlock
+description: A 6-digit code generator app built with Flutter.
+publish_to: 'none' # Prevents accidental publication to pub.dev
+
+version: 1.0.0+2
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  vibration: any
+  google_fonts: any
+  logger: any
+  package_info_plus: any
+  provider: any
+  url_launcher: any
+  shared_preferences: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: any
+
+  flutter_launcher_icons: any
+  flutter_native_splash: any
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  web:
+    generate: true
+    image_path: assets/icon/icon.png
+    background_color: "#141E30"
+    theme_color: "#243B55"
+  image_path: assets/icon/icon.png
+  
+flutter_native_splash:
+  color: "#141E30"
+  image: assets/icon/splash.png
+  android: true
+  ios: true
+  web: true
+
+flutter:
+  uses-material-design: true
+
+  # Enables localisation generation
+  generate: true
+
+  assets:
+    - assets/icon/
