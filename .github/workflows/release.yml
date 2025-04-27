@@ -33,7 +33,7 @@ jobs:
           mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/ntunlock-${GITHUB_REF##*/}.apk
 
       - name: Create Release with Notes
-        uses: ghartington/gh-release-action@v1
+        uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref }}
           release_name: "Version ${{ github.ref }}"
