@@ -18,7 +18,7 @@ jobs:
           channel: stable
 
       - name: Data protection
-        run: flutter --no-analytics
+        run: flutter config --no-analytics
 
       - name: Install dependencies
         run: |
