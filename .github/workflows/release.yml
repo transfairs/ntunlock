@@ -30,18 +30,25 @@ jobs:
       - name: Generate translation packs
         run: flutter gen-l10n
 
+      - name: Set environment variables
+        run: |
+          echo "APK_NAME=build/app/outputs/flutter-apk/ntunlock-$GITHUB_REF_NAME.apk" >> $GITHUB_ENV
+          echo $APK_NAME
+          echo ${{ env.APK_NAME }}
+          ls -l
+
       - name: Build APK for release
         run: |
           flutter build apk --release
 
       - name: Rename APK
         run: |
-          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/ntunlock-${GITHUB_REF##*/}.apk
+          mv build/app/outputs/flutter-apk/app-release.apk $APK_NAME
 
       - name: Create Release with Notes
         uses: softprops/action-gh-release@v2
         with:
-          body_path: ${{ github.workspace }}-ReleaseNotes.md
-          files: build/app/outputs/flutter-apk/ntunlock-${GITHUB_REF##*/}.apk
+          body_path: ReleaseNotes.md
+          files: $APK_NAME
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
