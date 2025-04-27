@@ -36,9 +36,9 @@ jobs:
           echo "APK_NAME=build/app/outputs/flutter-apk/ntunlock-$GITHUB_REF_NAME.apk" >> $GITHUB_OUTPUT
           echo "TAG_NAME=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
 
-      - name: Check APK name
+      - name: Check tag name
         run: |
-          echo ${{ steps.vars.outputs.APK_NAME }}
+          echo ${{ steps.vars.outputs.TAG_NAME }}
 
 #      - name: Build APK for release
 #        run: |
