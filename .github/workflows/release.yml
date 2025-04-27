@@ -3,7 +3,7 @@ name: Build and Release Android App
 on:
   push:
     tags:
-      - '*'
+      - "v*.*.*"
 
 permissions:
   contents: write
@@ -39,18 +39,9 @@ jobs:
           mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/ntunlock-${GITHUB_REF##*/}.apk
 
       - name: Create Release with Notes
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref }}
-          name: "${{ github.ref }}"
-          body: |
-            $(cat "Release Notes.md")
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload APK as GitHub Release Asset
-        uses: softprops/action-gh-release@v1
-        with:
-          files: build/app/outputs/flutter-apk/app-release.apk
+          body_path: ${{ github.workspace }}-ReleaseNotes.md
+          files: build/app/outputs/flutter-apk/ntunlock-${GITHUB_REF##*/}.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
