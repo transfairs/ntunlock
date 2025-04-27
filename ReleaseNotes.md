@@ -1,6 +1,6 @@
-# 🚀 NTUnlock v1.0.0
+# 🚀 NTUnlock v0.1.0
 
-Welcome to the first public release of **NTUnlock**!  
+Welcome to the first beta release of **NTUnlock**!  
 This app enables users to conveniently generate a maintenance unlock code for NordicTrack fitness equipment.
 
 ---

@@ -36,9 +36,13 @@ jobs:
           echo "APK_NAME=build/app/outputs/flutter-apk/ntunlock-$GITHUB_REF_NAME.apk" >> $GITHUB_OUTPUT
           echo "TAG_NAME=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
 
+      - name: Set up Keystore
+        run: |
+          echo "${{ secrets.SIGNING_KEY }}" | base64 --decode > keystore.jks
+      
       - name: Build APK for release
         run: |
-          flutter build apk --release
+          flutter build apk --release --no-shrink --keystore=keystore.jks --keystore-password=${{ secrets.STORE_PASSWORD }} --key-alias=${{ secrets.KEY_ALIAS }} --key-password=${{ secrets.KEY_PASSWORD }}
 
       - name: Rename APK
         run: |

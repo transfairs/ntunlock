@@ -43,26 +43,27 @@ android {
         versionName = flutter.versionName
     }
 
-//    signingConfigs {
-//        create("release") {
-//            keyAlias = keystoreProperties["keyAlias"] as String
-//            keyPassword = keystoreProperties["keyPassword"] as String
-//            storeFile = file(keystoreProperties["storeFile"] as String)
-//            storePassword = keystoreProperties["storePassword"] as String
-//        }
-//    }
+    signingConfigs {
+        create("release") {
+            keyAlias = keystoreProperties["keyAlias"] as String
+            keyPassword = keystoreProperties["keyPassword"] as String
+            storeFile = file(keystoreProperties["storeFile"] as String)
+            storePassword = keystoreProperties["storePassword"] as String
+        }
+    }
 
     buildTypes {
         release {
-            // signingConfig = signingConfigs.getByName("release") // Own signing
             isMinifyEnabled = false
             isShrinkResources = false
             if (project.hasProperty("googlePlayAppSigningEnabled") && project.extra["googlePlayAppSigningEnabled"].toString().toBoolean()) {
                 // Google Play signs
                 signingConfig = null
             } else {
+                // Own signing
+                signingConfig = signingConfigs.getByName("release")
                 // Signing with the debug keys for now, so `flutter run --release` works.
-                signingConfig = signingConfigs.getByName("debug")
+                //signingConfig = signingConfigs.getByName("debug")
             }
              proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
