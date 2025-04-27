@@ -20,6 +20,9 @@ jobs:
         with:
           channel: stable
 
+      - name: Data protection
+        run: flutter --no-analytics
+
       - name: Install dependencies
         run: flutter pub get
 
