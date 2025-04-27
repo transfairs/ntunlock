@@ -14,6 +14,9 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// App signing by Google Play
+extra["googlePlayAppSigningEnabled"] = false
+
 android {
     namespace = "de.transfairs.nt_unlock"
     compileSdk = flutter.compileSdkVersion
@@ -51,14 +54,16 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            // signingConfig = signingConfigs.getByName("debug")
             // signingConfig = signingConfigs.getByName("release") // Own signing
             isMinifyEnabled = false
             isShrinkResources = false
-            if (project.hasProperty("googlePlayAppSigningEnabled") && googlePlayAppSigningEnabled.toString().toBoolean()) {
-                signingConfig = null // Google Play signs
+            if (project.hasProperty("googlePlayAppSigningEnabled") && project.extra["googlePlayAppSigningEnabled"].toString().toBoolean()) {
+                // Google Play signs
+                signingConfig = null
+            } else {
+                // Signing with the debug keys for now, so `flutter run --release` works.
+                signingConfig = signingConfigs.getByName("debug")
+            }
              proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
