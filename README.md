@@ -18,11 +18,10 @@ We are currently in closed testing and are looking for testers to help us improv
 - **Install the app**: See below
 
 ## Screenshots
-
-![Code Generator](/assets/screenshots/preview1.png)
-![Bright Mode](/assets/screenshots/preview2.png)
-![Timer](/assets/screenshots/preview3.png)
-![Navigation](/assets/screenshots/preview4.png)
+<img src="/assets/screenshots/preview1.png" width="200" alt="Code Generator" />
+<img src="/assets/screenshots/preview2.png" width="200" alt="Bright Mode" />
+<img src="/assets/screenshots/preview3.png" width="200" alt="Timer" />
+<img src="/assets/screenshots/preview4.png" width="200" alt="Navigation]" />
 
 ## Installation
 
