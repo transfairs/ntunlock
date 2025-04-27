@@ -36,23 +36,19 @@ jobs:
           echo "APK_NAME=build/app/outputs/flutter-apk/ntunlock-$GITHUB_REF_NAME.apk" >> $GITHUB_OUTPUT
           echo "TAG_NAME=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
 
-      - name: Check tag name
+      - name: Build APK for release
         run: |
-          echo ${{ steps.vars.outputs.TAG_NAME }}
+          flutter build apk --release
 
-#      - name: Build APK for release
-#        run: |
-#          flutter build apk --release
-
-#      - name: Rename APK
-#        run: |
-#          mv build/app/outputs/flutter-apk/app-release.apk ${{ steps.vars.outputs.APK_NAME }}
+      - name: Rename APK
+        run: |
+          mv build/app/outputs/flutter-apk/app-release.apk ${{ steps.vars.outputs.APK_NAME }}
 
       - name: Create Release with Notes
         uses: softprops/action-gh-release@v2
         with:
           name: ${{ steps.vars.outputs.REF_NAME }}
           body_path: ReleaseNotes.md
-#          files: ${{ steps.vars.outputs.APK_NAME }}
+          files: ${{ steps.vars.outputs.APK_NAME }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
