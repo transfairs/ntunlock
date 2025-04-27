@@ -1,0 +1,50 @@
+name: Build and Release Android App
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: |
+          flutter pub get
+
+      - name: Generate translation packs
+        run: flutter gen-l10n
+
+      - name: Build APK for release
+        run: |
+          flutter build apk --release
+
+      - name: Rename APK
+        run: |
+          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/ntunlock-${GITHUB_REF##*/}.apk
+
+      - name: Create Release with Notes
+        uses: ghartington/gh-release-action@v1
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: "Version ${{ github.ref }}"
+          body: |
+            $(cat "Release Notes.md")
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload APK as GitHub Release Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/app/outputs/flutter-apk/app-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
