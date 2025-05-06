@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
 import 'package:nt_unlock/logic/code_generator.dart';
 import 'package:nt_unlock/l10n/l10n.dart';
+//import 'package:nt_unlock/core/app_state.dart';
 import 'package:nt_unlock/presentation/widgets/app_drawer.dart';
 import 'package:nt_unlock/presentation/widgets/app_logo_bar.dart';
 import 'package:nt_unlock/presentation/widgets/action_buttons.dart';
 import 'package:nt_unlock/presentation/widgets/gradient_background.dart';
 import 'package:nt_unlock/presentation/widgets/input_fields.dart';
 import 'package:nt_unlock/presentation/widgets/result_display.dart';
+//import 'package:provider/provider.dart';
 
 /// Main screen of the application.
 ///
@@ -76,6 +78,7 @@ class _CodeScreenState extends State<CodeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //final appState = context.watch<AppState>();
     final localised = AppLocalizations.of(context)!;
     final ready = _controllers.every((c) => c.text.length == 1);
     final isDark = Theme.of(context).brightness == Brightness.dark;

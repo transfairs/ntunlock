@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppLogoBar extends StatelessWidget implements PreferredSizeWidget {
   const AppLogoBar({super.key});
@@ -8,8 +9,9 @@ class AppLogoBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localised = AppLocalizations.of(context)!;
     return AppBar(
-      title: const Text('NTUnlock'),
+      title: Text(localised.title),
       backgroundColor: Colors.transparent,
       foregroundColor: Theme.of(context).colorScheme.onSurface,
       elevation: 0,

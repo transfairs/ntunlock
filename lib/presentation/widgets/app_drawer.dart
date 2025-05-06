@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:nt_unlock/theme/theme_provider.dart';
+import 'package:nt_unlock/core/app_state.dart';
+import 'package:nt_unlock/presentation/widgets/language_switcher.dart';
+//import 'package:nt_unlock/theme/theme_provider.dart';
 //import 'dart:io' show Platform, exit;
 //import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -74,13 +76,25 @@ class AppDrawer extends StatelessWidget {
                   ? Colors.white.withValues(alpha: 0.26)
                   : Colors.black.withValues(alpha: 0.26)),
           ListTile(
+              leading: Icon(Icons.language),
+              title: Text(localised.drawerLanguage),
+              onTap: () {
+                //Provider.of<AppState>(context, listen: false)
+                //    .toggleTheme(context);
+                Navigator.pop(context);
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) => const LanguageSwitcher(),
+                );
+              }),
+          ListTile(
             leading: Icon(
               isDarkMode ? Icons.light_mode : Icons.dark_mode,
               color: isDarkMode ? Colors.yellow : Colors.indigo,
             ),
             title: Text(themeText),
             onTap: () {
-              Provider.of<ThemeProvider>(context, listen: false)
+              Provider.of<AppState>(context, listen: false)
                   .toggleTheme(context);
               Navigator.pop(context);
             },

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:nt_unlock/core/app_state.dart';
 import 'package:nt_unlock/theme/app_theme.dart';
-import 'package:nt_unlock/theme/theme_provider.dart';
 import 'package:nt_unlock/presentation/screens/countdown_screen.dart';
 import 'package:nt_unlock/presentation/screens/code_screen.dart';
 import 'package:nt_unlock/presentation/screens/about_screen.dart';
@@ -18,19 +17,21 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(
-      builder: (context, themeProvider, _) {
+    return Consumer<AppState>(
+      builder: (context, appState, _) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'NTUnlock',
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
-          themeMode: themeProvider.themeMode,
+          themeMode: appState.themeMode,
           // locale: Locale('en'),
+          locale: context.watch<AppState>().locale,
           supportedLocales: const [
             Locale('en'),
             Locale('de'),
           ],
+          //supportedLocales: AppLocalizations.supportedLocales,
           localeResolutionCallback: (locale, supportedLocales) {
             if (locale != null) {
               for (final supported in supportedLocales) {
@@ -41,12 +42,14 @@ class App extends StatelessWidget {
             }
             return supportedLocales.first;
           },
+          /*
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
-          ],
+          ], */
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
           /*
           initialRoute: '/',
           routes: {

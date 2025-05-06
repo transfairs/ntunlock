@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nt_unlock/app.dart';
-import 'package:nt_unlock/theme/theme_provider.dart';
+import 'package:nt_unlock/core/app_state.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   testWidgets('enters six digits and sees result', (tester) async {
     await tester.pumpWidget(
       ChangeNotifierProvider(
-        create: (_) => ThemeProvider(),
+        create: (_) => AppState(),
         child: const App(),
       ),
     );
