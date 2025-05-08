@@ -25,8 +25,7 @@ class App extends StatelessWidget {
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
           themeMode: appState.themeMode,
-          // locale: Locale('en'),
-          locale: context.watch<AppState>().locale,
+          locale: appState.locale,
           supportedLocales: const [
             Locale('en'),
             Locale('de'),

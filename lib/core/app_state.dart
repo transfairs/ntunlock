@@ -1,40 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:nt_unlock/core/logger.dart';
 
+/// A [ChangeNotifier] that manages and persists app-wide settings,
+/// such as the user's preferred [Locale] and [ThemeMode].
+///
+/// Settings are persisted using [SharedPreferences] and are restored on initialisation.
 class AppState extends ChangeNotifier {
-  String _input = '';
-  String _output = '';
-  Locale? _locale; // = const Locale('en');
+  Locale? _locale;
+  Brightness? _systemBrightness;
   ThemeMode _themeMode = ThemeMode.system;
 
-  String get input => _input;
-  String get output => _output;
   Locale? get locale => _locale;
   ThemeMode get themeMode => _themeMode;
 
-  void setInput(String value) {
-    _input = value;
+  AppState() {
+    _loadPreferences();
+  }
+
+  Future<void> _loadPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final langCode = prefs.getString('locale');
+    if (langCode != null && langCode.isNotEmpty) {
+      _locale = Locale(langCode);
+    }
+
+    final themeString = prefs.getString('themeMode');
+    if (themeString != null) {
+      _themeMode = _parseThemeMode(themeString);
+    }
+
     notifyListeners();
   }
 
-  void setOutput(String value) {
-    _output = value;
+  /// Sets the system brightness if it hasn't been initialised yet.
+  ///
+  /// This is used to derive a default theme mode if the user hasn't chosen one.
+  void initSystemBrightness(Brightness brightness) {
+    _systemBrightness ??= brightness;
+  }
+
+  Future<void> switchLocale(Locale? newLocale) async {
+    _locale = newLocale;
+    final prefs = await SharedPreferences.getInstance();
+    if (newLocale != null) {
+      await prefs.setString('locale', newLocale.languageCode);
+    } else {
+      await prefs.remove('locale');
+    }
     notifyListeners();
+  }
+
+  Future<void> toggleTheme() async {
+    _systemBrightness = _systemBrightness == Brightness.dark
+        ? Brightness.light
+        : Brightness.dark;
+    _themeMode =
+        _systemBrightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('themeMode', _themeMode.name);
+    notifyListeners();
+  }
+
+  ThemeMode _parseThemeMode(String value) {
+    switch (value) {
+      case 'dark':
+        return ThemeMode.dark;
+      case 'light':
+        return ThemeMode.light;
+      default:
+        return ThemeMode.system;
+    }
   }
 
   void reset() {
-    _input = '';
-    _output = '';
-    notifyListeners();
-  }
-
-  void switchLocale(Locale? newLocale) {
-    _locale = newLocale;
-    notifyListeners();
-  }
-
-  void toggleTheme(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    _themeMode = isDark ? ThemeMode.light : ThemeMode.dark;
+    _locale = null;
+    _themeMode = ThemeMode.system;
     notifyListeners();
   }
 }

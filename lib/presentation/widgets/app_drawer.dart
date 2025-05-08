@@ -3,18 +3,17 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:nt_unlock/core/app_state.dart';
 import 'package:nt_unlock/presentation/widgets/language_switcher.dart';
-//import 'package:nt_unlock/theme/theme_provider.dart';
-//import 'dart:io' show Platform, exit;
-//import 'package:flutter/foundation.dart' show kIsWeb;
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appState = context.read<AppState>();
     final localised = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
 
+    appState.initSystemBrightness(theme.brightness);
     final isDarkMode = theme.brightness == Brightness.dark;
     final themeText = isDarkMode
         ? AppLocalizations.of(context)!.activateLight
@@ -79,8 +78,6 @@ class AppDrawer extends StatelessWidget {
               leading: Icon(Icons.language),
               title: Text(localised.drawerLanguage),
               onTap: () {
-                //Provider.of<AppState>(context, listen: false)
-                //    .toggleTheme(context);
                 Navigator.pop(context);
                 showModalBottomSheet(
                   context: context,
@@ -94,8 +91,7 @@ class AppDrawer extends StatelessWidget {
             ),
             title: Text(themeText),
             onTap: () {
-              Provider.of<AppState>(context, listen: false)
-                  .toggleTheme(context);
+              Provider.of<AppState>(context, listen: false).toggleTheme();
               Navigator.pop(context);
             },
           ),

@@ -8,11 +8,12 @@ This update brings even more flexibility and control to your experience.
 - 🌍 **Manual Language Switcher:** Users can now switch between languages directly in the app settings. No need to rely solely on automatic detection.
 
 ## 🛠 Improvements and Fixes
-- 🐞 Minor UI and performance tweaks
+- 💾 **Persistent Settings:** Your language and theme preferences are now saved across sessions.
+- ✅ **Stability Fix:** Resolved a potential crash (null pointer) on the countdown screen when leaving it before starting the timer.
+- 🧹 **General Code Review:** Minor cleanups and robustness improvements throughout the app.
 
 ## ℹ️ Known Limitations
 - The correct maintenance unlock method may still vary depending on your NordicTrack device.
-- Settings are not persisted (yet).
 
 ## Thank you for using NTUnlock! 🧰
 

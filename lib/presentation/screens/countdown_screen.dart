@@ -14,7 +14,7 @@ class CountdownScreen extends StatefulWidget {
 
 class CountdownScreenState extends State<CountdownScreen> {
   double _timeLeft = 7.0; // Base time in seconds
-  late Timer _timer;
+  late Timer? _timer;
   bool _isRunning = false;
 
   void _startCountdown() {
@@ -34,7 +34,7 @@ class CountdownScreenState extends State<CountdownScreen> {
           }
         });
       } else {
-        _timer.cancel();
+        _timer!.cancel();
         setState(() {
           _isRunning = false;
         });
@@ -44,7 +44,9 @@ class CountdownScreenState extends State<CountdownScreen> {
 
   @override
   void dispose() {
-    _timer.cancel();
+    if (_isRunning) {
+      _timer!.cancel();
+    }
     super.dispose();
   }
 
