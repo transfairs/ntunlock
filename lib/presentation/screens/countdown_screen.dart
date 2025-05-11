@@ -35,6 +35,7 @@ class CountdownScreenState extends State<CountdownScreen> {
         });
       } else {
         _timer!.cancel();
+        _timeLeft = 7.0;
         setState(() {
           _isRunning = false;
         });
@@ -87,11 +88,11 @@ class CountdownScreenState extends State<CountdownScreen> {
                             strokeWidth: 6, // Thinner stroke width
                             backgroundColor: theme.brightness == Brightness.dark
                                 ? Colors.grey[700]
-                                : Colors.grey[300],
+                                : Color(0xFFBBDEFB),
                             valueColor: AlwaysStoppedAnimation(
                               theme.brightness == Brightness.dark
-                                  ? Colors.yellow
-                                  : Colors.indigo,
+                                  ? Colors.orange
+                                  : Color(0xFF5FB3E9),
                             ),
                           ),
                         ),

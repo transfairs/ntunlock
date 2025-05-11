@@ -59,7 +59,8 @@ class AppDrawer extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/instructions'),
           ),
           ListTile(
-            leading: const Icon(Icons.timer, color: Colors.orange),
+            leading: Icon(Icons.access_time,
+                color: isDarkMode ? Colors.orange : Colors.indigo),
             title: Text(localised.countdownTitle),
             onTap: () {
               Navigator.pushReplacementNamed(context, '/countdown');
@@ -92,7 +93,7 @@ class AppDrawer extends StatelessWidget {
             title: Text(themeText),
             onTap: () {
               Provider.of<AppState>(context, listen: false).toggleTheme();
-              Navigator.pop(context);
+              //Navigator.pop(context);
             },
           ),
           ListTile(

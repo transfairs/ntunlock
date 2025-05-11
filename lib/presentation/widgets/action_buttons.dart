@@ -16,6 +16,15 @@ class ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    final overlayHover = isDark
+        ? theme.colorScheme.onSurface.withValues(alpha: 0.05)
+        : Color(0xFFBBDEFB); // theme.colorScheme.primary.withOpacity(0.08);
+
+    final overlayPressed = isDark
+        ? theme.colorScheme.onSurface.withValues(alpha: 0.1)
+        : Color(0xFF5FB3E9); // theme.colorScheme.primary.withOpacity(0.12);
 
     return ElevatedButton(
       onPressed: onPressed,
@@ -36,10 +45,10 @@ class ActionButton extends StatelessWidget {
         overlayColor: WidgetStateProperty.resolveWith<Color?>(
           (Set<WidgetState> states) {
             if (states.contains(WidgetState.hovered)) {
-              return theme.colorScheme.onSurface.withValues(alpha: 0.05);
+              return overlayHover; // theme.colorScheme.onSurface.withValues(alpha: 0.05);
             }
             if (states.contains(WidgetState.pressed)) {
-              return theme.colorScheme.onSurface.withValues(alpha: 0.1);
+              return overlayPressed; // theme.colorScheme.onSurface.withValues(alpha: 0.1);
             }
             return null;
           },

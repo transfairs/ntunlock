@@ -5,7 +5,7 @@
   "reset": "Neue Zahl",
   "input": "Eingabe:",
   "instructionsTitle": "Anleitung",
-  "instructionsBody": "1. Öffnen Sie auf dem Traingsgerät das iFit-Menü.\n2. Wählen Sie „Einstellungen“ > „Wartung“.\n3. Tippen Sie 10x (bei einigen Geräten 15x) auf einen leeren Bereich.\n4. Warten Sie 7 Sekunden. ((link:/countdown:Stoppuhr:timer))\n5. Tippen Sie erneut 10x (oder 15x) auf dieselbe Stelle.\n6. Der Eingabe-Code erscheint.\n7. Übertragen Sie diesen in den (link:/:Code-Generator:lock) und berechnen Sie den Entsperrcode.\n8. Geben Sie den Entsperrcode auf dem Trainingsgerät ein.\n9. Wenn das erfolgreich war, erscheint: „Privileged mode is enabled“.",
+  "instructionsBody": "1. Öffnen Sie auf dem Traingsgerät das iFit-Menü.\n2. Wählen Sie „Einstellungen“ → „Wartung“.\n3. Tippen Sie 10x (bei einigen Geräten 15x) auf einen leeren Bereich.\n4. Warten Sie 7 Sekunden. ((link:/countdown:Stoppuhr:access_time))\n5. Tippen Sie erneut 10x (oder 15x) auf dieselbe Stelle.\n6. Der Eingabe-Code erscheint.\n7. Übertragen Sie diesen in den (link:/:Code-Generator:lock) und berechnen Sie den Entsperrcode.\n8. Geben Sie den Entsperrcode auf dem Trainingsgerät ein.\n9. Wenn das erfolgreich war, erscheint: „Privileged mode is enabled“.",
   "back": "Zurück",
   "about": "Über diese App",
   "aboutBody": "Ein Hilfswerkzeug um in den Wartungszugang bei NordicTrack-Konsolen zu gelangen.",
@@ -25,5 +25,15 @@
   "disclaimerBody": "Die Nutzung dieser App erfolgt auf eigene Gefahr. Der Entwickler übernimmt keine Haftung für Schäden, die durch die Nutzung der App entstehen, einschließlich, aber nicht beschränkt auf Schäden an Geräten, Verlust von Daten oder Funktionsstörungen.\n\nDie App dient dazu, das Trainingsgerät zu entsperren und in den „Privileged Mode“ (Wartungsmodus) zu versetzen, der ausschließlich für erfahrene Servicetechniker gedacht ist. Unbedachtes Vorgehen kann dazu führen, dass das Trainingsgerät unbrauchbar wird oder die Garantieansprüche gegenüber dem Hersteller erlöschen. Der Entwickler übernimmt keinerlei Verantwortung für den Verlust der Garantie oder für Schäden, die durch die Nutzung der App an dem Trainingsgerät entstehen.\n\nEs wird ausdrücklich darauf hingewiesen, dass nicht nur die Nutzung der App, sondern auch der Gebrauch des Wartungsmodus zu schwerwiegenden Folgen führen kann, einschließlich der Beschädigung des Geräts oder der Beeinträchtigung seiner Funktionalität. Der Entwickler übernimmt keine Haftung für derartige Folgen.\n\nDie Nutzung der App auf Geräten, die nicht in Ihrem Besitz sind oder für die Sie keine ausdrückliche Erlaubnis zur Entsperrung haben, ist verboten. Der Entwickler übernimmt keinerlei Haftung für Schäden, die durch das Entsperren von fremden Geräten oder durch die unbefugte Nutzung der App entstehen.\n\nDie App darf nur gemäß den vorgesehenen Anwendungsrichtlinien und ausschließlich für den vorgesehenen Zweck verwendet werden. Der Entwickler übernimmt keine Verantwortung für Schäden, die durch unsachgemäße Nutzung der App entstehen.\n\nDie App wurde für bestimmte Geräte und Modelle entwickelt. Der Entwickler übernimmt keine Haftung für die Nutzung auf nicht unterstützten Geräten oder Modellen.\n\nEs wird empfohlen, die App nur in Übereinstimmung mit den eigenen Geräten und ausschließlich durch qualifizierte Fachkräfte zu verwenden. Der Entwickler übernimmt keine Haftung für Fehler oder unvorhergesehene Auswirkungen, die durch die Nutzung der App oder durch Softwarefehler entstehen. Es wird empfohlen, vor der Nutzung alle wichtigen Daten zu sichern.\n\nDer Entwickler übernimmt keine Verantwortung für etwaige rechtliche Konsequenzen, die durch die unsachgemäße Nutzung der App oder des Wartungsmodus entstehen können.",
   "agree": "Verstanden und Zustimmen",
   "drawerLanguage": "Sprache",
-  "languageSystem": "Systemsprache"
+  "languageSystem": "Systemsprache",
+  "instructionsTitle": "Anleitung",
+  "instruction1": "Öffnen Sie auf dem Trainingsgerät das iFit-Menü.",
+  "instruction2": "Wählen Sie „Einstellungen“ → „Wartung“.",
+  "instruction3": "Tippen Sie 10x (bei einigen Geräten 15x) auf einen leeren Bereich.",
+  "instruction4": "Warten Sie 7 Sekunden. ((link:/countdown:Timer:access_time))",
+  "instruction5": "Tippen Sie erneut 10x (oder 15x) auf dieselbe Stelle.",
+  "instruction6": "Der Eingabe-Code erscheint.",
+  "instruction7": "Übertragen Sie diesen in den (link:/:Code Generator:lock) und berechnen Sie den Entsperrcode.",
+  "instruction8": "Geben Sie den Entsperrcode auf dem Trainingsgerät ein.",
+  "instruction9": "Wenn das erfolgreich war, erscheint: „Privileged mode is enabled“."
 }

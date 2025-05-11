@@ -48,6 +48,7 @@ class DisclaimerDialogState extends State<DisclaimerDialog> {
                     children: [
                       Text(
                         localised.disclaimerBody,
+                        textAlign: TextAlign.justify,
                         style: const TextStyle(fontSize: 16),
                       ),
                     ],

@@ -5,7 +5,8 @@ import 'package:nt_unlock/theme/app_theme.dart';
 import 'package:nt_unlock/presentation/screens/countdown_screen.dart';
 import 'package:nt_unlock/presentation/screens/code_screen.dart';
 import 'package:nt_unlock/presentation/screens/about_screen.dart';
-import 'package:nt_unlock/presentation/screens/instructions_screen.dart';
+import 'package:nt_unlock/presentation/screens/instruction_screen.dart';
+// import 'package:nt_unlock/presentation/screens/instructions_screen.dart';
 import 'package:nt_unlock/presentation/widgets/disclaimer_dialog.dart';
 import 'package:provider/provider.dart';
 
@@ -74,7 +75,7 @@ class App extends StatelessWidget {
                         );
                       case '/instructions':
                         return MaterialPageRoute(
-                          builder: (_) => const InstructionsScreen(),
+                          builder: (_) => const InstructionScreen(),
                         );
                       case '/countdown':
                         return MaterialPageRoute(

@@ -38,6 +38,8 @@ class ClickableLinks extends StatelessWidget {
     // Combine both lists of matches
     final allMatches = [...externalMatches, ...internalMatches];
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     final textSpans = <TextSpan>[];
     int lastMatchEnd = 0;
 
@@ -66,9 +68,6 @@ class ClickableLinks extends StatelessWidget {
 
       // Add the clickable link with icon
       textSpans.add(TextSpan(
-        style: const TextStyle(
-          color: Colors.blue,
-        ),
         children: [
           if (iconName != null)
             WidgetSpan(
@@ -77,14 +76,14 @@ class ClickableLinks extends StatelessWidget {
                 child: Icon(
                   _getIconByName(iconName),
                   size: 16.0,
-                  color: Colors.blue,
+                  color: isDark ? Colors.orange : Colors.indigo,
                 ),
               ),
             ),
           TextSpan(
             text: linkText ?? link,
-            style: const TextStyle(
-              color: Colors.blue,
+            style: TextStyle(
+              color: isDark ? Colors.orange : Colors.indigo,
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
@@ -120,6 +119,8 @@ class ClickableLinks extends StatelessWidget {
   // Function to get an icon by name
   IconData _getIconByName(String iconName) {
     switch (iconName) {
+      case 'access_time':
+        return Icons.access_time;
       case 'alarm':
         return Icons.alarm;
       case 'lock':
