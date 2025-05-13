@@ -1,5 +1,9 @@
 # NTUnlock App
 
+[![Try it online](https://img.shields.io/badge/Try%20it%20online-NTUnlock-blue?logo=flutter&style=for-the-badge)](https://transfairs.github.io/ntunlock/)
+[![Download](https://img.shields.io/badge/Download-Releases-green?style=for-the-badge&logo=github)](https://github.com/transfairs/ntunlock/releases)
+
+
 NTUnlock is an app designed to unlock and put your NordicTrack training device into privileged mode. Ideal for experienced service technicians, this app provides access to advanced settings and configurations that are not available in the regular user interface.
 
 Currently, the app is in **closed testing**, and we are actively looking for testers who can help us improve the app. If you are interested in testing, please join the testing group using the link below.
@@ -10,24 +14,28 @@ Currently, the app is in **closed testing**, and we are actively looking for tes
 - Access system settings to install third-party applications, customize software, and personalize your device.
 - Designed for experienced service technicians.
 
-## How to Become a Tester
+## 🌍 Web Version
 
-We are currently in closed testing and are looking for testers to help us improve the app. To become a tester and get access to the app:
-
-- **Join our testing group**: [ntunlock@googlegroups.com](https://groups.google.com/u/1/g/ntunlock)
-- **Install the app**: See below
+The latest version of this project is automatically deployed at:
+👉 [https://transfairs.github.io/ntunlock/](https://transfairs.github.io/ntunlock/)
 
 ## Screenshots
-<img src="/assets/screenshots/preview1.png" width="200" alt="Code Generator" align="left" />
-<img src="/assets/screenshots/preview2.png" width="200" alt="Bright Mode" align="left" />
-<img src="/assets/screenshots/preview3.png" width="200" alt="Timer" align="left" />
-<img src="/assets/screenshots/preview4.png" width="200" alt="Navigation]" />
+<img src="/assets/screenshots/StoreFront Dark.png" width="200" alt="Dark Mode" align="left" />
+<img src="/assets/screenshots/StoreFront Light.png" width="200" alt="Bright Mode" align="left" />
+<img src="/assets/screenshots/Timer 10.png" width="400" alt="Timer" align="left" />
+<img src="/assets/screenshots/Manual.png" width="400" alt="Manual" />
 
 ## Installation
 
+### Android
 1. Go to the [Google Play Store](https://play.google.com/store/apps/details?id=de.transfairs.nt_unlock).
 2. Download and install the app.
-3. Follow the instructions to unlock your NordicTrack training device and access privileged mode.
+3. Follow the manual to unlock your NordicTrack training device and access privileged mode.
+
+### Linux/Windows
+1. Go to [Releases](https://github.com/transfairs/ntunlock/releases).
+2. Download the version compatible to your operating system.
+3. Extract und run the app.
 
 ## Build
 For developers. Tested with Ubuntu.

@@ -9,8 +9,33 @@ permissions:
   contents: write
 
 jobs:
-  build:
+
+  deploy-web:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: stable
+
+      - name: Build Web
+        run: flutter build web --release
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/web
+
+  build-linux-android:
+    runs-on: ubuntu-latest
+    needs: deploy-web
+    outputs:
+      APK_NAME: ${{ steps.vars.outputs.APK_NAME }}
+      LINUX_NAME: ${{ steps.vars.outputs.LINUX_NAME }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -30,10 +55,11 @@ jobs:
       - name: Generate translation packs
         run: flutter gen-l10n
 
-      - name: Set APK name
+      - name: Set Variables
         id: vars
         run: |
-          echo "APK_NAME=build/app/outputs/flutter-apk/ntunlock-$GITHUB_REF_NAME.apk" >> $GITHUB_OUTPUT
+          echo "APK_NAME=ntunlock-$GITHUB_REF_NAME.apk" >> $GITHUB_OUTPUT
+          echo "LINUX_NAME=ntunlock-$GITHUB_REF_NAME-linux-x64.tar.gz" >> $GITHUB_OUTPUT
           echo "TAG_NAME=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
 
       - name: Set up Keystore
@@ -53,13 +79,79 @@ jobs:
 
       - name: Rename APK
         run: |
-          mv build/app/outputs/flutter-apk/app-release.apk ${{ steps.vars.outputs.APK_NAME }}
+          mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/${{ steps.vars.outputs.APK_NAME }}
+
+      - name: Build Linux App
+        run: |
+          flutter build linux --release
+
+      - name: Archive Linux build
+        run: |
+          cd build/linux/x64/release/bundle
+          tar -czf "${{ steps.vars.outputs.LINUX_NAME }}" *
+          sha256sum "${{ steps.vars.outputs.LINUX_NAME }}" > "${{ steps.vars.outputs.LINUX_NAME }}.sha256"
+          cat ${{ steps.vars.outputs.LINUX_NAME }}.sha256
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-android-build
+          path: |
+            build/app/outputs/flutter-apk/${{ steps.vars.outputs.APK_NAME }}
+            build/linux/x64/release/build/${{ steps.vars.outputs.LINUX_NAME }}
+            build/linux/x64/release/build/${{ steps.vars.outputs.LINUX_NAME }}.sha256
+
+  build-windows:
+    runs-on: windows-latest
+    needs: build-linux-android
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      - name: Set Variables
+        id: vars
+        run: |
+          echo "WINDOWS_NAME=ntunlock-$GITHUB_REF_NAME-windows-x64.zip" >> $GITHUB_OUTPUT
+
+      - name: Build Windows
+        run: flutter build windows --release
+
+      - name: Zip Windows build
+        run: |
+          cd build/windows/runner/Release
+          Compress-Archive -Path * -DestinationPath ${{ steps.vars.outputs.WINDOWS_NAME }}
+          Get-FileHash -Algorithm SHA256 ${{ steps.vars.outputs.WINDOWS_NAME }} | ForEach-Object {
+            "$($_.Hash) ${{ steps.vars.outputs.WINDOWS_NAME }}" | Out-File -Encoding ASCII ${{ steps.vars.outputs.WINDOWS_NAME }}.sha256
+          }
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build
+          path: |
+            build/windows/runner/Release/${{ steps.vars.outputs.WINDOWS_NAME }}
+            build/windows/runner/Release/${{ steps.vars.outputs.WINDOWS_NAME }}.sha256
+
+  release:
+    runs-on: ubuntu-latest
+    needs: [build-linux-android, build-windows]
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
 
       - name: Create Release with Notes
         uses: softprops/action-gh-release@v2
         with:
-          name: ${{ steps.vars.outputs.REF_NAME }}
+          name: $GITHUB_REF_NAME
           body_path: ReleaseNotes.md
-          files: ${{ steps.vars.outputs.APK_NAME }}
+          files: artifacts/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

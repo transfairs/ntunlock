@@ -1,15 +1,16 @@
-# 🚀 NTUnlock v1.0.0
+# 🚀 NTUnlock v1.0.1
 
-Welcome to the first official release! A fresh new look for *NTUnlock*! This 🎨 **UI Overhaul** version focuses on visual clarity, usability, and a smoother experience across all devices.
+This patch release improves text accuracy and expands the availability of *NTUnlock* across platforms.
 
-## 🛠 Improvements and Fixes
 
-- 🧾 **Modern Instruction Layout**: The instruction screen has been completely redesigned with icons, better spacing, and improved readability.
-- 🎯 **Refined Buttons**: Action buttons now adapt visually to light and dark themes and respond clearly to hover and press interactions.
-- 🧩 **Material 3 Support**: UI components now follow Material Design 3 standards for a more consistent, future-proof look and feel.
-- 🎨 **Themed Backgrounds**: Light mode now uses a softer gradient and better contrast to avoid visual fatigue.
-- 🧾 **Timer**: The timer got a new icon and more adjusting colours in light mode.
+## ✏️ Fixes
+- 🈳 **Translation Correction**: A localisation error in the instruction screen has been fixed.
+- 🔤 **Spelling Fix**: A UI text typo was corrected.
 
+## 💻 New Distributions
+- 🐧 **Linux Release**: NTUnlock is now available as a native Linux build (`.tar.gz`) with checksum.
+- 🪟 **Windows Release**: NTUnlock is now available as a Windows app (`.zip`) including all runtime files.
+- 🌍 **Web Version**: The app is now also available online via [GitHub Pages](https://transfairs.github.io/ntunlock/) for browser use (no installation required).
 
 ## ℹ️ Known Limitations
 - The correct maintenance unlock method may still vary depending on your NordicTrack device.
