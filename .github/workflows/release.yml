@@ -163,17 +163,31 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-linux-android, build-windows]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           path: artifacts
           merge-multiple: true
 
-      - name: Create Release with Notes
+    - name: Extract all artifacts
+      run: |
+        mkdir extracted
+        for file in artifacts/*.zip; do
+          unzip -o "$file" -d extracted
+        done
+
+    - name: Create Release with Notes
         uses: softprops/action-gh-release@v2
         with:
           name: $GITHUB_REF_NAME
           body_path: ReleaseNotes.md
-          files: artifacts/*
+          files: |
+            extracted/linux/x64/release/bundle/*
+            extracted/app/outputs/flutter-apk/*
+            extracted/ntunlock-*-windows-x64.zip*
+            
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
