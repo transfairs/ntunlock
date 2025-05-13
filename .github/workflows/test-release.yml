@@ -1,0 +1,51 @@
+name: Debugging pipeline issues
+
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Set Variables
+        id: vars
+        run: |
+          echo "WINDOWS_NAME=ntunlock-${{ github.ref_name }}-windows-x64.zip" >> $env:$GITHUB_OUTPUT
+
+      - name: Data protection
+        run: flutter config --no-analytics
+
+      - name: Install dependencies
+        run: |
+          flutter pub get
+
+      - name: Generate translation packs
+        run: flutter gen-l10n
+
+      - name: Build Windows
+        run: flutter build windows --release
+
+      - name: Zip Windows build
+        run: |
+          cd build/windows/x64/runner/Release
+          Compress-Archive -Path * -DestinationPath "${{ steps.vars.outputs.WINDOWS_NAME }}"
+          Get-FileHash -Algorithm SHA256 ${{ steps.vars.outputs.WINDOWS_NAME }} | ForEach-Object {
+            "$($_.Hash) ${{ steps.vars.outputs.WINDOWS_NAME }}" | Out-File -Encoding ASCII "${{ steps.vars.outputs.WINDOWS_NAME }}.sha256"
+          }
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build
+          path: |
+            build/windows/x64/runner/Release/${{ steps.vars.outputs.WINDOWS_NAME }}
+            build/windows/x64/runner/Release/${{ steps.vars.outputs.WINDOWS_NAME }}.sha256
