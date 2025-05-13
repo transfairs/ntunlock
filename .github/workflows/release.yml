@@ -21,6 +21,16 @@ jobs:
         with:
           channel: stable
 
+      - name: Data protection
+        run: flutter config --no-analytics
+
+      - name: Install dependencies
+        run: |
+          flutter pub get
+
+      - name: Generate translation packs
+        run: flutter gen-l10n
+
       - name: Build Web
         run: flutter build web --release
 
@@ -117,6 +127,16 @@ jobs:
         id: vars
         run: |
           echo "WINDOWS_NAME=ntunlock-$GITHUB_REF_NAME-windows-x64.zip" >> $GITHUB_OUTPUT
+
+      - name: Data protection
+        run: flutter config --no-analytics
+
+      - name: Install dependencies
+        run: |
+          flutter pub get
+
+      - name: Generate translation packs
+        run: flutter gen-l10n
 
       - name: Build Windows
         run: flutter build windows --release
