@@ -1,5 +1,6 @@
 name: Debugging pipeline issues
 
+on: workflow_dispatch
 
 permissions:
   contents: write
