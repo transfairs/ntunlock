@@ -110,8 +110,8 @@ jobs:
           name: linux-android-build
           path: |
             build/app/outputs/flutter-apk/${{ steps.vars.outputs.APK_NAME }}
-            build/linux/x64/release/build/${{ steps.vars.outputs.LINUX_NAME }}
-            build/linux/x64/release/build/${{ steps.vars.outputs.LINUX_NAME }}.sha256
+            build/linux/x64/release/bundle/${{ steps.vars.outputs.LINUX_NAME }}
+            build/linux/x64/release/bundle/${{ steps.vars.outputs.LINUX_NAME }}.sha256
 
   build-windows:
     runs-on: windows-latest
