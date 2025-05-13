@@ -20,9 +20,7 @@ jobs:
       - name: Set Variables
         id: vars
         run: |
-          echo "WINDOWS_NAME=ntunlock-$GITHUB_REF_NAME-windows-x64.zip" >> $env:GITHUB_OUTPUT
-          echo "WINDOWS_NAME=ntunlock-$GITHUB_REF_NAME-windows-x64.zip"
-
+          echo "WINDOWS_NAME=ntunlock-${{ github.ref_name }}-windows-x64.zip" >> $env:GITHUB_OUTPUT
 
       - name: Data protection
         run: flutter config --no-analytics
