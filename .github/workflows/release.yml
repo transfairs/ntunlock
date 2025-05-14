@@ -174,8 +174,6 @@ jobs:
         id: vars
         run: |
           echo "TAG_NAME=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
-          ls artifacts
-          tree artifacts
 
       - name: Create Release with Notes
         uses: softprops/action-gh-release@v2
@@ -183,6 +181,6 @@ jobs:
           name: ${{ steps.vars.outputs.TAG_NAME }}
           body_path: ReleaseNotes.md
           files: |
-            artifacts/*
+            artifacts/**
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
