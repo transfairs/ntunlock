@@ -176,8 +176,9 @@ jobs:
         run: |
           mkdir extracted
           for file in artifacts/*.zip; do
-            unzip -o "$file" -d extracted
+            unzip -o "$file" -d temp
           done
+          find temp -type f -exec mv -t extracted {} +
   
       - name: Create Release with Notes
           uses: softprops/action-gh-release@v2
