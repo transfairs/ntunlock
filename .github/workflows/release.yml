@@ -175,20 +175,12 @@ jobs:
         run: |
           echo "TAG_NAME=$GITHUB_REF_NAME" >> $GITHUB_OUTPUT
 
-      - name: Extract all artifacts
-        run: |
-          mkdir extracted
-          for file in artifacts/*.zip; do
-            unzip -o "$file" -d temp
-          done
-          find temp -type f -exec mv -t extracted {} +
-  
       - name: Create Release with Notes
         uses: softprops/action-gh-release@v2
         with:
           name: ${{ steps.vars.outputs.TAG_NAME }}
           body_path: ReleaseNotes.md
           files: |
-            extracted/*
+            artifacts/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
